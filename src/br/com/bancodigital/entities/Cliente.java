@@ -6,20 +6,18 @@ public class Cliente {
 	private long cpf;
 	private String telefone;
 	private String endereco;
-	private char tipoCliente;
-	private double saldo;
+	private String tipoCliente;
 
 	public Cliente() {
 	}
 
-	public Cliente(String nome, long cpf, String telefone, String endereco, char tipoCliente, double saldo) {
-		super();
+	public Cliente(int agencia, int numeroConta, String nome, long cpf, String telefone, String endereco,
+			String tipoCliente, double saldo) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.tipoCliente = tipoCliente;
-		this.saldo = saldo;
 	}
 
 	public String getNome() {
@@ -53,21 +51,13 @@ public class Cliente {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
-	public char getTipoCliente() {
+
+	public String getTipoCliente() {
 		return tipoCliente;
 	}
-	
-	public void setTipoCliente(char tipoCliente) {
+
+	public void setTipoCliente(String tipoCliente) {
 		this.tipoCliente = tipoCliente;
-	}
-
-	public double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
 	}
 
 }
