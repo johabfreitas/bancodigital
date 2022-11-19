@@ -4,21 +4,20 @@ import java.util.Random;
 
 import br.com.bancodigital.interfaces.IConta;
 
-public class Conta implements IConta {
+public abstract class Conta implements IConta {
 
 	private int agencia;
 	private String numeroConta;
-	private double deposit;
+	private double saldo;
 	public final double tax = 5.00;
 
 	public Conta() {
-
 	}
 
-	public Conta(int agencia, double deposit) {
+	public Conta(int agencia) {
 		this.agencia = agencia;
 		this.numeroConta = gerarNumeroConta();
-		this.deposit = deposit;
+		this.saldo = 0.00;
 	}
 
 	public int getAgencia() {
@@ -34,11 +33,11 @@ public class Conta implements IConta {
 	}
 
 	public double getDeposit() {
-		return deposit;
+		return saldo;
 	}
 
 	public void setDeposit(double deposit) {
-		this.deposit = deposit;
+		this.saldo = deposit;
 	}
 
 	public double getTax() {
@@ -46,26 +45,27 @@ public class Conta implements IConta {
 	}
 
 	@Override
-	public void depositar(double valor) {
-		// TODO Auto-generated method stub
+	public double addDeposito(double valor) {
+		return saldo += valor;
 		
 	}
 
 	@Override
-	public void sacar(double valor) {
-		// TODO Auto-generated method stub
+	public double sacar(double valor) {
+		return saldo -= valor + tax;
 		
 	}
 
 	@Override
-	public void transferir(double valor) {
-		// TODO Auto-generated method stub
+	public void transferir(double valor, IConta contaDestino) {
+		this.sacar(valor);
+		contaDestino.addDeposito(valor);
 		
 	}
 
-	@Override
-	public void emprestimo(double valor) {
-		// TODO Auto-generated method stub
+	
+	public double emprestimo(double valor) {
+		return saldo += valor;
 		
 	}
 
@@ -87,7 +87,7 @@ public class Conta implements IConta {
 
 	@Override
 	public String toString() {
-		return "Conta [agencia=" + agencia + ", numeroConta=" + gerarNumeroConta() + ", deposit=" + deposit + ", tax=" + tax
+		return "Conta [agencia=" + agencia + ", numeroConta=" + gerarNumeroConta() + ", deposit=" + saldo + ", tax=" + tax
 				+ "]";
 	}
 	
